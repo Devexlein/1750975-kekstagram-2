@@ -1,7 +1,8 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Людмила Скрипкина](https://up.htmlacademy.ru/javascript-individual/2/user/1750975).
-* Наставник: `Неизвестно`.
+* Наставник: [Денис Лопатин](https://htmlacademy.ru/profile/denislopatin).
+* Ссылка на проект: [Проект "Кекстаграм"](https://devexlein.github.io/1750975-kekstagram-2/).
 
 ---
 
