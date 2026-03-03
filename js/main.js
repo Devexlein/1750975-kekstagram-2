@@ -1,9 +1,9 @@
-const NAMES = [
+export const NAMES = [
   'Liam', 'Yuki', 'Amara', 'Mateo', 'Ahmed', 'Svetlana', 'Hans', 'Diego', 'Ingrid', 'Fatima', 'Zahra',
   'Santiago', 'Mei', 'Nikolai', 'Siobhan'
 ];
 
-const DESCRIPTIONS = [
+export const DESCRIPTIONS = [
   'Деловой портрет. Мужчина в строгом костюме у панорамного окна офиса на 25 этаже, на фоне — закатный город.',
   'Весенняя невеста. Девушка в белом платье в цветущем саду среди лепестков яблони и сакуры.',
   'Стиль лофт. Девушка в кожаной куртке на старом диване в интерьере с кирпичными стенами и индустриальными деталями.',
@@ -31,7 +31,7 @@ const DESCRIPTIONS = [
   'Технологии: Макросъемка микросхемы с футуристичной подсветкой дорожек.'
 ];
 
-const MESSAGES = [
+export const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -40,26 +40,26 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const INITIAL_NUMBER_AVATAR = 1;
-const FINAL_NUMBER_AVATAR = 6;
-const MIN_LIKES = 15;
-const MAX_LIKES = 200;
-const MIN_COMMENTS = 0;
-const MAX_COMMENTS = 30;
-const SIMILAR_PICTURE_COUNT = 25;
+export const INITIAL_NUMBER_AVATAR = 1;
+export const FINAL_NUMBER_AVATAR = 6;
+export const MIN_LIKES = 15;
+export const MAX_LIKES = 200;
+export const MIN_COMMENTS = 0;
+export const MAX_COMMENTS = 30;
+export const SIMILAR_PICTURE_COUNT = 25;
 
 /**
  * Генератор ID
  * @param {number} [start = 1] - Начальное значение счетчика.
  * @returns {() => number} - Функция-счетчик увеличивает значение на 1 при каждом вызове.
 */
-const createIdGenerator = (start = 1) => {
+export const createIdGenerator = (start = 1) => {
   let lastGenerateId = start;
   return () => lastGenerateId++;
 };
 
-const generatePictureId = createIdGenerator(1);
-const generateCommentId = createIdGenerator(1);
+export const generatePictureId = createIdGenerator(1);
+export const generateCommentId = createIdGenerator(1);
 
 /**
  * Возвращает случайное число в заданом диапазоне положительных чисел (включительно).
@@ -67,7 +67,7 @@ const generateCommentId = createIdGenerator(1);
  * @param {number} max - Максимальное значение в диапазоне (включительно).
  * @returns {number} - Случайное число в заданом диапазоне.
 */
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 /**
  * Возвращает случайный элемент из переданного массива.
@@ -75,21 +75,19 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + 
  * @param {any[]} elements - Массив элементов, из которых выбирается случайный элемент.
  * @returns {any} - Случайный элемент массива elements.
 */
-const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
-
-/**
- * @typedef {Object} Comment
- * @property {string} id - Уникальный идентификатор комментария, сгенерированный функцией generateCommentId().
- * @property {string} avatar - Путь к изображению аватара в формате photos/NN.jpg, где NN - случайное число от INITIAL_NUMBER_AVATAR до FINAL_NUMBER_AVATAR.
- * @property {string} message - Текст комментария, выбранный случайно из массива MESSAGES.
- * @property {string} name - Имя автора комментария, выбранное случайно из массива NAMES.
- */
+export const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
 
 /**
  * Создает новый комментарий со случайными данными.
+ * @typedef {Object} Comment
+ * @property {number} id - Уникальный идентификатор комментария, сгенерированный функцией generateCommentId().
+ * @property {string} avatar - Путь к изображению аватара в формате photos/NN.jpg, где NN - случайное число от INITIAL_NUMBER_AVATAR до FINAL_NUMBER_AVATAR.
+ * @property {string} message - Текст комментария, выбранный случайно из массива MESSAGES.
+ * @property {string} name - Имя автора комментария, выбранное случайно из массива NAMES.
+ *
  * @returns {Comment} Объект комментария.
  */
-const createComment = () => ({
+export const createComment = () => ({
   id: generateCommentId(),
   avatar: `photos/${getRandomInt(INITIAL_NUMBER_AVATAR, FINAL_NUMBER_AVATAR)}.jpg`,
   message: getRandomArrayElement(MESSAGES),
@@ -97,20 +95,20 @@ const createComment = () => ({
 });
 
 /**
+ * Генерирует описание фотографии, опубликованной пользователем.
  * @typedef {Object} PictureDescription
- * @property {string} id - Уникальный идентификатор описания, сгенерированный функцией generatePictureId().
+ * @property {number} id - Уникальный идентификатор описания, сгенерированный функцией generatePictureId().
  * @property {string} url - URL пути к изображению в формате photos/NN.jpg, где NN соответствует id.
  * @property {string} description - Описание фотографии, выбранное случайно из массива DESCRIPTIONS.
  * @property {number} likes - Количество лайков, случайное число от MIN_LIKES до MAX_LIKES включительно.
  * @property {Comment[]} comments - Вложенный массив комментариев к фотографии. Типизирован выше как массив объектов Comment.
-/**
- * Генерирует описание фотографии, опубликованной пользователем с случайными данными и комментариями.
+ *
  * @returns {PictureDescription} Объект описания изображения.
  */
-const generatePictureDescription = () => {
-  const pictureID = generatePictureId();
-  return {id: pictureID,
-    url: `photos/${pictureID}.jpg`,
+export const generatePictureDescription = () => {
+  const pictureId = generatePictureId();
+  return {id: pictureId,
+    url: `photos/${pictureId}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomInt(MIN_LIKES, MAX_LIKES),
     comments: Array.from({length: getRandomInt(MIN_COMMENTS, MAX_COMMENTS)}, createComment)
