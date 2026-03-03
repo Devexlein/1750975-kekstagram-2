@@ -88,8 +88,9 @@ export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min 
 /**
  * Возвращает случайный элемент из переданного массива.
  * Использует функцию getRandomInt для генерации случайного индекса в диапазоне [0, length-1].
- * @param {any[]} elements - Массив элементов, из которых выбирается случайный элемент.
- * @returns {any} - Случайный элемент массива elements.
+ * @template A
+ * @param {A[]} elements - Массив элементов, из которых выбирается случайный элемент.
+ * @returns {A} - Случайный элемент массива elements.
 */
 export const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
 
