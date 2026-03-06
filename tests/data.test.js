@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
-import { createComment, generatePictureDescription } from '../js/main';
+import { createComment, generatePictureDescription } from '../js/data';
 
 describe('Does the createComment function create an array object whose values are a list of comments', () => {
   // Выполняется перед каждым тестом автоматически
